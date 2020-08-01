@@ -1,8 +1,18 @@
+//createManager() initializes first-->teamChoices()
+//teamChoices()-->createIntern()-->teamChoices()
+//teamChoices()-->createEngineer()-->teamChoices()
+//teamChoices()-->finishBuildingTeam()
+
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 var inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
 var teamArray = [];
+
+// finishBuildingTeam() {
+// // pull objects from array and print to html...string literals.
+
+// }
 
 function createManager() {
   inquirer
@@ -11,7 +21,7 @@ function createManager() {
         type: "input",
         name: "name",
         message: "What is the the name of your Team Manager?",
-        validate: (input) => {
+        validate: function (input) {
           if (input === "") {
             console.log("Please enter name of Team Manager");
             return false;
@@ -22,9 +32,9 @@ function createManager() {
       },
       {
         type: "input",
-        id: "id",
+        name: "id",
         message: "What is Team Manager's Employee ID ?",
-        validate: (input) => {
+        validate: function (input) {
           if (input === "") {
             console.log("Please enter Employee ID of Team Manager");
             return false;
@@ -35,24 +45,24 @@ function createManager() {
       },
       {
         type: "input",
-        email: "email",
+        name: "email",
         message: "What is Team Manager's Email address?",
-        validate: (input) => {
-          if (input === "") {
-            console.log("Please enter name Email Adress");
-            return false;
-          } else {
+        validate: function (input) {
+          if (input.includes("@") && input) {
             return true;
+          } else {
+            console.log("\nplease enter a valid email");
+            return false;
           }
         },
       },
       {
         type: "input",
-        officeNumber: "officeNumber",
+        name: "officeNumber",
         message: "What is Team Manager's Office Number?",
         validate: (input) => {
           if (input === "") {
-            console.log("Please enter name of Team Manager");
+            console.log("Please enter office number of Team Manager");
             return false;
           } else {
             return true;
@@ -61,7 +71,7 @@ function createManager() {
       },
     ])
     .then((answers) => {
-      //pass in answers to create new constructor
+      //   pass in answers to create new constructor
       const manager = new Manager(
         answers.name,
         answers.id,
@@ -69,8 +79,10 @@ function createManager() {
         answers.officeNumber
       );
       teamArray.push(manager);
+
       teamChoices();
-    });
+    })
+    .catch((error) => console.error(error));
 }
 
 function createIntern() {
@@ -91,7 +103,7 @@ function createIntern() {
       },
       {
         type: "input",
-        id: "id",
+        name: "id",
         message: "What is Team Intern's Employee ID ?",
         validate: (input) => {
           if (input === "") {
@@ -104,20 +116,20 @@ function createIntern() {
       },
       {
         type: "input",
-        email: "email",
+        name: "email",
         message: "What is Team Intern's Email address?",
         validate: (input) => {
-          if (input === "") {
-            console.log("Please enter name Email Adress");
-            return false;
-          } else {
-            return true;
-          }
+            if(input.includes("@") && input){ 
+                return true
+              } else {
+                console.log('\nplease enter a valid email')
+                return false
+              }
         },
       },
       {
         type: "input",
-        school: "school",
+        name: "school",
         message: "What is Team Intern's School?",
         validate: (input) => {
           if (input === "") {
@@ -139,11 +151,12 @@ function createIntern() {
       );
       teamArray.push(intern);
       teamChoices();
-    });
+    })
+    .catch((error) => console.error(error));
 }
 
 function createEngineer() {
-    inquirer
+  inquirer
     .prompt([
       {
         type: "input",
@@ -160,7 +173,7 @@ function createEngineer() {
       },
       {
         type: "input",
-        id: "id",
+        name: "id",
         message: "What is Team engineer's Employee ID ?",
         validate: (input) => {
           if (input === "") {
@@ -173,24 +186,24 @@ function createEngineer() {
       },
       {
         type: "input",
-        email: "email",
+        name: "email",
         message: "What is Team engineer's Email address?",
         validate: (input) => {
-          if (input === "") {
-            console.log("Please enter name Email Adress");
-            return false;
-          } else {
-            return true;
-          }
+            if(input.includes("@") && input){ 
+                return true
+              } else {
+                console.log('\nplease enter a valid email')
+                return false
+              }
         },
       },
       {
         type: "input",
-        github: "github",
+        name: "github",
         message: "What is Team engineer's github profile?",
         validate: (input) => {
           if (input === "") {
-            console.log("Please enter name of Team engineer' github profile");
+            console.log("Please enter name of Team Engineer's github profile");
             return false;
           } else {
             return true;
@@ -208,10 +221,9 @@ function createEngineer() {
       );
       teamArray.push(engineer);
       teamChoices();
-    });
+    })
+    .catch((error) => console.error(error));
 }
-
-
 
 function teamChoices() {
   inquirer
@@ -220,7 +232,7 @@ function teamChoices() {
         type: "list",
         name: "addTeamMemberOrStop",
         message: "Would you like to add another Team Member?",
-        choices: ["Intern", "Engineer", "Finish Building Team"],
+        choices: ["Intern", "Engineer", "Finish Building Team"], //"Print Details"
       },
     ])
     .then((answers) => {
@@ -231,9 +243,22 @@ function teamChoices() {
         case "Engineer":
           createEngineer(); //same format as createManager
           break;
+        // case "Print Details":
+        //   printArray();
+        //   break;
         case "Finish Building Team":
           finishBuildingTeam(); // stop inquirer...and handle array --> pass to string literals...require
           break;
       }
     });
 }
+
+function printArray() {
+  console.log(teamArray);
+}
+
+function startProgram() {
+  createManager();
+}
+
+startProgram();
