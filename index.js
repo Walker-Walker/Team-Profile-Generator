@@ -3,33 +3,123 @@ const questions = [
     {
         type: "input",
         name: "name",
-        message: "What is emp?",
+        message: "What is the the name of your Team Manager?",
         validate: input => {
           if(input === ""){ 
-            console.log("Please enter a GitHub User Name")
+            console.log("Please enter name of Team Manager")
             return false   
           } else {
             return true
-          } 
-          
+          }    
       }
-
-
     },
-]
+    {
+        type: "input",
+        name: "name",
+        message: "What is Team Manager's Employee ID ?",
+        validate: input => {
+          if(input === ""){ 
+            console.log("Please enter Employee ID of Team Manager")
+            return false   
+          } else {
+            return true
+          }    
+      }
+    },
+    {
+        type: "input",
+        name: "name",
+        message: "What is Team Manager's Email address?",
+        validate: input => {
+          if(input === ""){ 
+            console.log("Please enter name Email Adress")
+            return false   
+          } else {
+            return true
+          }    
+      }
+    },
+    {
+        type: "input",
+        name: "name",
+        message: "What is Team Manager's Office Number?",
+        validate: input => {
+          if(input === ""){ 
+            console.log("Please enter name of Team Manager")
+            return false   
+          } else {
+            return true
+          }    
+      }
+    },
+//     {
+//         type: "input",
+//         name: "name",
+//         message: "What is emp?",
+//         validate: input => {
+//           if(input === ""){ 
+//             console.log("Please enter name of Team Manager")
+//             return false   
+//           } else {
+//             return true
+//           }    
+//       }
+//     },
+//     {
+//         type: "input",
+//         name: "name",
+//         message: "What is emp?",
+//         validate: input => {
+//           if(input === ""){ 
+//             console.log("Please enter name of Team Manager")
+//             return false   
+//           } else {
+//             return true
+//           }    
+//       }
+//     },
+//     {
+//         type: "input",
+//         name: "name",
+//         message: "What is emp?",
+//         validate: input => {
+//           if(input === ""){ 
+//             console.log("Please enter name of Team Manager")
+//             return false   
+//           } else {
+//             return true
+//           }    
+//       }
+//     },
+//     {
+//         type: "input",
+//         name: "name",
+//         message: "What is emp?",
+//         validate: input => {
+//           if(input === ""){ 
+//             console.log("Please enter name of Team Manager")
+//             return false   
+//           } else {
+//             return true
+//           }    
+//       }
+//     },
+//     {
+//         type: "input",
+//         name: "name",
+//         message: "What is emp?",
+//         validate: input => {
+//           if(input === ""){ 
+//             console.log("Please enter name of Team Manager")
+//             return false   
+//           } else {
+//             return true
+//           }    
+//       }
+//     },
+// ]
 
-type: "input",
-name: "name",
-message: "What is your Github User Name?",
-validate: input => {
-  if(input === ""){ 
-    console.log("Please enter a GitHub User Name")
-    return false   
-  } else {
-    return true
-  } 
-  
-}
+
 
 
 var inquirer = require('inquirer');
