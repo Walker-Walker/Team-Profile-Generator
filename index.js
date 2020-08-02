@@ -255,9 +255,9 @@ function teamChoices() {
     });
 }
 
-function printArray() {
-  console.log(teamArray);
-}
+// function printArray() {
+//   console.log(teamArray);
+// }
 
 function startProgram() {
   createManager();

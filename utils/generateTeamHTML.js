@@ -1,32 +1,39 @@
 function generateTeamHTML(data) {
   const manager = data.manager;
   const managerCard = `
-  <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${manager.getName()}</h5>
-    <h4 class="card-text">${manager.getRole()}</p>
+  <div class="card">
+  <div class="card-body bg-primary">
+    <h5 class="card-title text-white">${manager.getName()}</h5>
+    <h4 class="card-text text-white">${manager.getRole()}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${manager.getId()}</li>
-    <li class="list-group-item">Email: ${manager.getEmail()}</li>
+    <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
       <li class="list-group-item">Office number:${manager.getOfficeNumber()} </li>
   </ul>
 </div>`;
-  const teamMembers = data.team; 
-  console.log('MANAGER=>',manager)
-  console.log("EMPLOYEES=>", teamMembers);
-  const teamMemberCards = teamMembers.map((teamMember,i) => {
-      console.log('team member=>',teamMember)
-    return `<div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">${teamMember.getName()}</h5>
-          <h4 class="card-text">${teamMember.getRole()}</p>
+  const teamMembers = data.team;
+  
+  const teamMemberCards = teamMembers.map((teamMember, i) => {
+  
+
+    return `<div class="col-4 mb-4">
+    <div class="card">
+        <div class="card-body bg-secondary">
+          <h5 class="card-title text-white">${teamMember.getName()}</h5>
+          <h4 class="card-text text-white">${teamMember.getRole()}</p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${teamMember.getId()}</li>
-          <li class="list-group-item">Email: ${teamMember.getEmail()}</li>
-          <li class="list-group-item">${teamMember.hasOwnProperty('getGithub()') ? 'GitHub: '+teamMember.getGithub() : 'School: ' +teamMember.getSchool()}</li>
+          <li class="list-group-item">Email: <a href="mailto:${teamMember.getEmail()}">${teamMember.getEmail()}</a></li>
+          <li class="list-group-item">${
+            teamMember.getRole() === "Engineer"
+              ? "GitHub: " +
+                `<a href ="http://github.com/${teamMember.getGithub()}/" >${teamMember.getGithub()}</a>`
+              : "School: " + teamMember.getSchool()
+          }</li>
         </ul>
+      </div>
       </div>`;
   });
   const listItemsToAppend = [managerCard, ...teamMemberCards];
@@ -46,13 +53,16 @@ function generateTeamHTML(data) {
         </h1>
      </div>
 <!--TODO://Add in Cards in a card container get from bootstrap-->
-    <div class = "container">  
-        <div class ="row">
-            <div class = "col"><div> `;
-  fragment += listItemsToAppend.join('') + `
-            <div>
-        <div>
-    <div>    
+     <div class = "container">  
+        <div class="row row-cols-1 row-cols-md-3">
+             `;
+
+  fragment +=
+    listItemsToAppend.join("") +
+    `
+
+        </div>
+    </div>    
   </body>
 </html>
 
@@ -63,9 +73,8 @@ function generateTeamHTML(data) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>  
 
 
-  `
+  `;
   return fragment;
-  ;
 }
 
 module.exports = generateTeamHTML;
