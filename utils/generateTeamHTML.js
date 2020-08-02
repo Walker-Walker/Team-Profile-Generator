@@ -45,8 +45,15 @@ function generateTeamHTML(data) {
            MY TEAM  
         </h1>
      </div>
-<!--TODO://Add in Cards in a card container get from bootstrap-->`;
-  fragment += listItemsToAppend.join('') + `</body>
+<!--TODO://Add in Cards in a card container get from bootstrap-->
+    <div class = "container">  
+        <div class ="row">
+            <div class = "col"><div> `;
+  fragment += listItemsToAppend.join('') + `
+            <div>
+        <div>
+    <div>    
+  </body>
 </html>
 
 
