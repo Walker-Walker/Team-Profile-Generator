@@ -1,6 +1,6 @@
 # Team-Profile-Generator
 
-# functionality
+# Functionality
 * A series of inquirer prompts will ask you details of your manager, intern and engineer. 
 * After details(email, github account, school, office number) have been entered and user accepts to complete team build
 * A html page with cards of each employee and their respective information will be printed.
