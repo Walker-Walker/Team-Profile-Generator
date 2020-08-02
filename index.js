@@ -1,18 +1,20 @@
-//createManager() initializes first-->teamChoices()
-//teamChoices()-->createIntern()-->teamChoices()
-//teamChoices()-->createEngineer()-->teamChoices()
-//teamChoices()-->finishBuildingTeam()
 
+const generateTeamHTML = require("./utils/generateTeamHTML");
+const fs = require("fs");
+const path = require("path");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
-var inquirer = require("inquirer");
+
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+  }
+
+const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
-var teamArray = [];
+const DATA = {};
+const teamArray = [];
 
-// finishBuildingTeam() {
-// // pull objects from array and print to html...string literals.
 
-// }
 
 function createManager() {
   inquirer
@@ -78,8 +80,7 @@ function createManager() {
         answers.email,
         answers.officeNumber
       );
-      teamArray.push(manager);
-
+      DATA.manager = manager;
       teamChoices();
     })
     .catch((error) => console.error(error));
@@ -247,7 +248,8 @@ function teamChoices() {
         //   printArray();
         //   break;
         case "Finish Building Team":
-          finishBuildingTeam(); // stop inquirer...and handle array --> pass to string literals...require
+          DATA.team = teamArray;  
+          writeToFile("index.html", generateTeamHTML(DATA)); // stop inquirer...and handle array --> pass to string literals...require
           break;
       }
     });
